@@ -1,0 +1,96 @@
+# Build using the node8build image
+image: jfrog.theirweb.net:5000/node8build:latest
+
+# Cache the node_modules/ folder between builds, as well as "untracked by Git" (build output) files
+cache:
+  untracked: true
+  key: "$CI_BUILD_REF_NAME"
+  paths:
+    - node_modules/
+    - dist/
+
+# May be helpful for debugging.
+before_script:
+  - env | grep ^PATH
+  - env | grep ^CI_
+
+stages:
+  - build
+  - deploy
+  - test
+  - cleanup_review_apps
+
+variables:
+  SERVICE_NAME: $CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_NAME-$CI_PIPELINE_ID
+
+build:
+  image: node
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  tags:
+    - node8
+  only:
+    - master
+
+deploy_qa:
+  stage: deploy
+  script:
+    - launch-review-app.sh -s $SERVICE_NAME --static-site true
+  tags:
+    - node8
+  environment:
+    name: QA
+    url: http://$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_NAME-$CI_PIPELINE_ID.review-apps.liveservices.net/
+  only:
+   - master
+# on_stop: undeploy_qa
+
+
+test:
+  stage: test
+  script:
+    - SERVER_URL=http://$SERVICE_NAME.$REVIEW_APPS_DOMAIN/ npm run e2e
+    - notify-slack-reviewapp.sh -e QA -l http://$SERVICE_NAME.$REVIEW_APPS_DOMAIN/ -sc paltalk-vt
+  tags:
+    - node8
+  only:
+    - master
+
+undeploy_qa:
+  stage: cleanup_review_apps
+  variables:
+      GIT_STRATEGY: none
+  script:
+    - destroy-review-app.sh -s $SERVICE_NAME
+  tags:
+    - node8
+  when: manual
+  environment:
+    name: QA
+    action: stop
+  only:
+    - master
+
+cleanup_qa_on_failure:
+  stage: cleanup_review_apps
+  variables:
+      GIT_STRATEGY: none
+  script:
+     - destroy-review-app.sh -s $SERVICE_NAME
+  when: on_failure
+  tags:
+     - node8
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - npm run deploy
+  tags:
+    - node8
+  when: manual
+  only:
+     - master@webng/pack-live

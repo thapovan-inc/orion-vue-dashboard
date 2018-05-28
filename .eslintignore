@@ -1,0 +1,2 @@
+# We normally shouldn't be doing this, but if we really need to have ESLint bypass something,
+# we can include a glob for it here.

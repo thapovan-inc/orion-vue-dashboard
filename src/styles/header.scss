@@ -1,0 +1,206 @@
+$white: #fff;
+$black: #000;
+
+header {
+	display:block;
+	margin:0;
+	padding:25px;
+	width:calc(100% - 50px);
+	height: 40px;
+	background-color: #2196f3;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
+	color:$white;
+	position:fixed;
+	z-index:2;
+	.left-col {
+		float:left;
+		width:368px;
+		.logo {
+			position:relative;
+			top:3px;
+			.pt-logo {
+				display:inline-block;
+				background:transparent url(https://www.palassets.com/sprites/paltalk_logo_white.svg) no-repeat 0 0;
+				background-size:contain;
+				width: 117.9px;
+				height: 28.4px;
+				float:left;
+			}
+			.txt {
+				display:inline-block;
+				float:left;
+				font-size: 20px;
+				font-weight: 300;
+				line-height:24px;
+				margin-left:13px;
+				strong {
+					font-weight: 700;
+				}
+			}
+		}
+	}
+	.middle-col {
+		float:left;
+		ul {
+			display:inline-block;
+			margin:0;
+			padding:0;
+			li {
+				display:inline-block;
+				margin:0;
+				padding:0;
+				font-size: 15px;
+				line-height:18px;
+				color:$white;
+				margin-right:43px;
+				&:last-child {
+					margin-right:0;
+				}
+				a {
+					color:$white;
+				}
+				&.active {
+					a {
+						display: inline-block;
+						vertical-align: middle;
+						font-size: 15px;
+						font-weight: 400;
+						line-height: 18px;
+						color: #59baff;
+						text-align: center;
+						min-width:68px;
+						padding: 9px 25px;
+						background:$white;
+						border-radius: 19px;
+						text-decoration: none;
+						cursor:default;
+					}
+				}
+			}
+		}
+	}
+	.right-col {
+		float:right;
+		.nickname {
+			font-size: 16px;
+			line-height:19px;
+			color: $white;
+			margin-right:23px;
+			position:relative;
+			top:7px;
+		}
+		.btn-submit {
+			float:right;
+		}
+		.cart {
+			display:inline-block;
+			position:relative;
+			top:9px;
+			margin-right:23px;
+			cursor:pointer;
+			float:left;
+			.count {
+				display:inline-block;
+				background-color: #ff745f;
+				border-radius: 100%;
+				font-size: 12px;
+				font-weight: 500;
+				line-height: 16px;
+				position:absolute;
+				top: -15px;
+				right: -15px;
+				text-align:center;
+				padding: 2px 5px;
+				min-width:10px;
+			}
+			.order-details {
+				position: absolute;
+				top: 30px;
+				right: -100px;
+				width: 350px;
+				border-radius: 6px;
+				background-color: $white;
+				box-shadow:0 0 10px 0 rgba(0, 0, 0, 0.3);
+				&::before {
+					content: '';
+					position: absolute;
+					top: -10px;
+					right:100px;
+					width: 0;
+					height: 0;
+					border-left: 10px solid transparent;
+					border-right: 10px solid transparent;
+					border-bottom: 10px solid $white;
+				}
+				.title {
+					padding:15px;
+					h5 {
+						font-size: 18px;
+						line-height:21px;
+						font-weight: 500;
+						text-align: left;
+						color: #2196f3;
+					}
+				}
+				.content {
+					padding:0;
+					margin:0;
+					display:block;
+					width:100%;
+					ul {
+						&.table {
+							display:table;
+							margin:0;
+							padding:0;
+							font-size:12px;
+							line-height:17px;
+							color:#4a4a4a;
+							li {
+								display:table-row;
+								span {
+									display:table-cell;
+									padding:7px;
+									vertical-align:middle;
+									border-bottom:solid 1px #d2d2d2;
+									&:last-child, &:nth-last-child(2) {
+										text-align:right;
+									}
+									img.gift {
+										display:inline-block;
+										float:left;
+										width:20px;
+										margin-right:5px;
+									}
+									.delete {
+										color: #ff3d3d;
+										&:before {
+											content:'\2716';
+										}
+									}
+								}
+								&:first-child {
+									background:#f0f0f0;
+									font-size:13px;
+									font-weight:500;
+								}
+								&:last-child {
+									font-weight:500;
+									font-size:13px;
+									span {
+										border-bottom:none;
+									}
+								}
+							}
+						}
+					}
+				}
+				.footer {
+					background-color: #f0f0f0;
+					text-align:center;
+					padding:15px;
+					width:calc(100% - 30px);
+				}
+			}
+		}
+	}
+}

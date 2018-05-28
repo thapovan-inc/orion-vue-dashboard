@@ -1,0 +1,159 @@
+$white: #fff;
+$black: #000;
+
+header {
+	display:block;
+	box-sizing:border-box;
+	margin:0;
+	padding:10px 25px;
+	float:left;
+	width:100%;
+	height: 70px;
+  	background-color: #4ca3dc;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.09);
+	color:$white;
+	position:fixed;
+	z-index:10;
+	.left-col {
+		display:block;
+		float:left;
+		width:290px;
+		position:relative;
+		.logo {
+			display:inline-block;
+			.orion-logo {
+				font-size: 28px;
+				font-weight: 700;
+				line-height: 33px;
+				color: #fff;
+				span {
+					display: block;
+					font-size: 16px;
+					font-weight: normal;
+					line-height: 19px;
+					color: #f0f3f3;
+				}
+			}
+		}
+		.toggle-icon {
+			display:inline-block;
+			width:25px;
+			border:none;
+			background:none;
+			box-shadow:none;
+			padding:0;
+			margin:0;
+			position:absolute;
+			right:25px;
+			top:15px;
+			cursor:pointer;
+			span {
+				display:block;
+				width: 100%;
+				height: 3px;
+				border-radius: 6px;
+				background-color: #fff;
+				margin-bottom:5px;
+				&:last-child {
+					margin-bottom:0;
+				}
+			}
+		}
+	}
+	.right-col {
+		display:block;
+		float:right;
+		width:calc(100% - 290px);
+		position:relative;
+		top:5px;
+		.user-details {
+			float:right;
+			.thumb {
+				display:inline-block;
+				vertical-align:middle;
+				width:35px;
+				height:35px;
+				margin-left:12px;
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius:100%;
+				}
+			}
+			.user-info {
+				display:inline-block;
+				vertical-align:middle;
+				font-size: 14px;
+				font-weight: 500;
+				text-align: right;
+				color: #fff;
+			}
+		}
+		.search-container {
+			float:left;
+			.search {
+				input[type="text"] {
+					min-width: 250px;					
+				}
+			}
+		}
+	}	
+}
+
+@media all and (max-width:1024px) {
+	header {
+		.right-col {
+			.user-details {
+				.thumb {
+					margin-left:0;
+				}
+				.user-info {
+					display: none;
+				}
+			}			
+		}
+	}
+}
+
+@media all and (max-width:767px) {
+	header {
+		padding:7px 10px 10px 10px;
+		position:relative;
+		height:auto;
+		.left-col {
+			width:200px;
+		}		
+		.right-col {
+			width:calc(100% - 200px);
+			.search-container {
+				width: calc(100% - 50px);
+				max-width:276px;
+				.search {
+					input[type="text"] {
+						min-width:100px;						
+					}
+				}
+			}
+		}
+	}
+}
+
+@media all and (max-width:480px) {
+	header {			
+		.right-col {
+			float:none;
+			width: 100%;	
+			.search-container {
+				float: left;
+				display: block;
+				width: 100%;
+				max-width:100%;
+				border-top: solid 1px #f0f0f0;
+				padding-top: 10px;
+				margin-top: 3px;
+				margin-bottom:5px;
+				text-align:center;			
+			}		
+		}
+	}
+}

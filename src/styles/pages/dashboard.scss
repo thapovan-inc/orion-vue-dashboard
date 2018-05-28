@@ -1,0 +1,163 @@
+@import "../layout/breadcrumb";
+@import "../layout/accordion";
+
+#dashboard {
+	padding-top: 5px;
+	display: block;
+	float: left;
+	width: 100%;
+	.page-title {
+		display:inline-block;
+		h2 {
+			font-size: 18px;
+			font-weight: 500;
+			text-transform: uppercase;
+			i {
+				margin-right:8px;
+			}
+		}
+	}
+	#search-section {
+		display:block;
+		width:100%;
+		float:left;
+		margin-bottom:10px;
+		.search-filters {
+			display:inline-block;
+			float:right;
+			position:relative;
+			top:-5px;
+			& > div {
+				display:inline-block;
+				vertical-align:middle;
+				margin-right:10px;
+				&:last-child {
+					margin-right:0;
+				}
+			}
+			.label {
+				font-size: 14px;
+				font-weight: 500;
+				text-transform:uppercase;
+				margin-right:20px;
+			}
+			input[type="text"] {
+				width:100px;
+				margin-right:7px;
+				&:last-child {
+					margin-right:0;
+				}
+			}
+			input[type="text"][name="location"] {
+				width:150px;
+			}
+		}
+	}
+	.main-wrapper {
+		display:block;
+		float:left;
+		clear:both;
+		width:100%;
+		background:#fff;
+		min-height:200px;
+		padding:15px;
+		box-sizing:border-box;
+		section {
+			display:block;
+			float:left;
+			margin:0 0 15px 0;
+			padding:0;
+			width:100%;
+			&:first-child {
+				border-bottom:solid 3px #f0f3f3;
+				padding-bottom:10px;
+				margin-bottom:20px;
+			}
+			.status {
+				display:inline-block;
+				margin-right:30px;
+				margin-bottom:5px;
+				.breadcrumb {
+					display:inline-block;
+					width:calc(100% + 10px);
+				}
+			}
+			&#charts {
+				article {
+					display:inline-block;
+					width:50%;
+					float:left;
+					padding:0 10px;
+					box-sizing:border-box;
+				}
+			}
+			&#breadcrumbs {
+			}
+		}
+	}
+}
+
+@media all and (max-width:1024px) {
+	#dashboard {
+		#search-section {
+			.search-filters {
+				top:0;
+				text-align:right;
+				.form-group {
+					display:block;
+					margin-top:10px;
+				}
+			}
+		}
+	}
+}
+
+@media all and (max-width:767px) {
+	#dashboard {
+		.main-wrapper {
+			section {
+				&#charts {
+					article {
+						width:100%;
+						margin-bottom:15px;
+						&:last-child {
+							margin-bottom:0;
+						}
+					}
+				}
+			}
+		}
+		#search-section {
+			margin-bottom:20px;
+			.search-filters {
+				display:block;
+				border-top: solid 1px #d8d8d8;
+				margin-top:10px;
+				padding-top:10px;
+				text-align:left;
+				float:none;
+			}
+		}
+	}
+}
+
+@media all and (max-width:500px) {
+	#dashboard {
+		#search-section {
+			.search-filters {
+				.label {
+					display:block;
+					margin-right:0;
+					margin-bottom:10px;
+				}
+				input[type="text"] {
+					width:calc(50% - 32px);
+				}
+				input[type="text"][name="location"] {
+					width: calc(100% - 26px);
+					margin-bottom:7px;
+				}
+			}
+		}
+	}
+}
