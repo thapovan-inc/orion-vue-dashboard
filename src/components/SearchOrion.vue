@@ -26,3 +26,6 @@
     </div>
 </template>
 
+<style lang="scss" scoped>
+    @import '../styles/components/search.scss';
+</style>

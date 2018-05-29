@@ -1,6 +1,4 @@
 @import "layout/common";
-@import "layout/header";
-@import "layout/sidebar";
 
 #orion {
 	width: 100%;
@@ -19,7 +17,7 @@
         width: 100%;
         z-index: 1;
 		#main-content {
-			padding:15px;
+			padding:15px 15px 0 15px;
 			transition: transform .3s ease-in-out,margin .3s ease-in-out;
 		}
     }
