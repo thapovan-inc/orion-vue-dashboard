@@ -9,12 +9,7 @@
                     <SearchOrion></SearchOrion>
                     <div class="main-wrapper">
                         <section id="charts">
-                            <article>
-                                <charts></charts>
-                            </article>
-                            <article>
-                                <img src="/static/img/map.jpg" alt="Map" />
-                            </article>
+                            <charts></charts>
                         </section>
                         <Breadcrumb></Breadcrumb>
                         <Accordion></Accordion>

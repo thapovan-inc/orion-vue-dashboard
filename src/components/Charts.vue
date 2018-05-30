@@ -1,9 +1,27 @@
 <script>
+    /* eslint-disable import/first */
+
     import { Scatter } from 'vue-chartjs';
+    import { serverBus } from '../main';
+    import zoom from 'chartjs-plugin-zoom';
+
 
     export default {
+        name: 'Charts',
+        data() {
+            return {
+                result: null
+            };
+        },
+        created() {
+            // Using the service bus
+            serverBus.$on('Charts', result => {
+                this.result = result;
+            });
+        },
         extends: Scatter,
         mounted() {
+            this.addPlugin(zoom);
             this.renderChart({
                 datasets: [
                     {
@@ -71,6 +89,40 @@
                     }
                 ]
             }, { responsive: true, maintainAspectRatio: false });
+        },
+        methods: {
+            beforeOpen(resp) {
+                this.users = resp.params.users;
+                this.traceid = resp.params.traceid;
+            }
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            // Container for pan options
+            pan: {
+                // Boolean to enable panning
+                enabled: true,
+
+                // Panning directions. Remove the appropriate direction to disable
+                // Eg. 'y' would only allow panning in the y direction
+                mode: 'xy'
+            },
+
+            // Container for zoom options
+            zoom: {
+                // Boolean to enable zooming
+                enabled: true,
+
+                // Zooming directions. Remove the appropriate direction to disable
+                // Eg. 'y' would only allow zooming in the y direction
+                mode: 'xy',
+            }
         }
     };
 </script>
