@@ -19,13 +19,13 @@
             </div>
             <div class="form-group">
                 <input type="text" name="location" placeholder="Location"
-                       v-model="keyword" v-bind:class="{ error : isKeywordError}"
-                       @keyup.enter="search()" :readonly="isKeywordLoading"/>
+                       v-model="locationKeyword" v-bind:class="{ error : isKeywordError}"
+                       @keyup.enter="searchByLocation()" :readonly="isKeywordLoading"/>
                 <input type="text" name="ip" placeholder="IP"
-                       v-model="keyword" v-bind:class="{ error : isKeywordError}"
+                       v-model="ipKeyword" v-bind:class="{ error : isKeywordError}"
                        @keyup.enter="search()" :readonly="isKeywordLoading"/>
                 <input type="text" name="date" placeholder="Date"
-                       v-model="keyword" v-bind:class="{ error : isKeywordError}"
+                       v-model="dateKeyword" v-bind:class="{ error : isKeywordError}"
                        @keyup.enter="search()" :readonly="isKeywordLoading"/>
             </div>
         </div>
@@ -42,7 +42,9 @@
     export default {
         name: 'app-seach',
         data: () => ({
-            keyword: '',
+            locationKeyword: '',
+            ipKeyword: '',
+            dateKeyword: '',
             isKeywordError: false,
             isKeywordLoading: false
         }),
@@ -51,16 +53,16 @@
         },
 
         methods: {
-            search() {
-                if (this.keyword.trim().length === 0) {
+            searchByLocation() {
+                if (this.locationKeyword.trim().length === 0) {
                     this.isKeywordError = true;
                     return;
                 }
                 this.isKeywordError = false;
-                const isTraceID = Utils.validTraceId(this.keyword);
+                const isTraceID = Utils.validTraceId(this.locationKeyword);
                 if (isTraceID) {
                     this.isKeywordLoading = true;
-                    UserService.getInfoByTraceID(this.keyword)
+                    UserService.getInfoByTraceID(this.locationKeyword)
                         .then(resp => {
                             this.isKeywordLoading = false;
 //                            if (!resp.data.status) {
@@ -69,23 +71,91 @@
 //                            }
                             const result = {
                                 users: resp.data.id,
-                                traceid: this.keyword,
+                                traceid: this.locationKeyword,
                             };
                             serverBus.$emit('Charts', result);
 //                            this.$modal.show('modal-selectNick', result);
                         }).catch(err => {
                             this.isKeywordLoading = false;
-                        // this.$notify(NotifyUtil.toastError(err.response));
+                            // this.$notify(NotifyUtil.toastError(err.response));
                             if (err.response.status > 400 && err.response.status < 500) {
                                 this.$router.push({ path: '/' });
                             }
                         });
                 } else {
-                    const link = `/home/${this.keyword}`;
+                    const link = `/home/${this.locationKeyword}`;
+                    this.$router.push({ path: link });
+                }
+            },
+            searchByIP() {
+                if (this.ipKeyword.trim().length === 0) {
+                    this.isKeywordError = true;
+                    return;
+                }
+                this.isKeywordError = false;
+                const isTraceID = Utils.validTraceId(this.ipKeyword);
+                if (isTraceID) {
+                    this.isKeywordLoading = true;
+                    UserService.getInfoByTraceID(this.ipKeyword)
+                        .then(resp => {
+                            this.isKeywordLoading = false;
+//                            if (!resp.data.status) {
+//                                this.$notify(NotifyUtil.toastError(resp.data.message));
+//                                return;
+//                            }
+                            const result = {
+                                users: resp.data.id,
+                                traceid: this.ipKeyword,
+                            };
+                            serverBus.$emit('Charts', result);
+//                            this.$modal.show('modal-selectNick', result);
+                        }).catch(err => {
+                            this.isKeywordLoading = false;
+                            // this.$notify(NotifyUtil.toastError(err.response));
+                            if (err.response.status > 400 && err.response.status < 500) {
+                                this.$router.push({ path: '/' });
+                            }
+                        });
+                } else {
+                    const link = `/home/${this.ipKeyword}`;
+                    this.$router.push({ path: link });
+                }
+            },
+            searchByDate() {
+                if (this.dateKeyword.trim().length === 0) {
+                    this.isKeywordError = true;
+                    return;
+                }
+                this.isKeywordError = false;
+                const isTraceID = Utils.validTraceId(this.dateKeyword);
+                if (isTraceID) {
+                    this.isKeywordLoading = true;
+                    UserService.getInfoByTraceID(this.dateKeyword)
+                        .then(resp => {
+                            this.isKeywordLoading = false;
+//                            if (!resp.data.status) {
+//                                this.$notify(NotifyUtil.toastError(resp.data.message));
+//                                return;
+//                            }
+                            const result = {
+                                users: resp.data.id,
+                                traceid: this.dateKeyword,
+                            };
+                            serverBus.$emit('Charts', result);
+//                            this.$modal.show('modal-selectNick', result);
+                        }).catch(err => {
+                            this.isKeywordLoading = false;
+                            // this.$notify(NotifyUtil.toastError(err.response));
+                            if (err.response.status > 400 && err.response.status < 500) {
+                                this.$router.push({ path: '/' });
+                            }
+                        });
+                } else {
+                    const link = `/home/${this.dateKeyword}`;
                     this.$router.push({ path: link });
                 }
             }
-        },
+        }
     };
 </script>
 

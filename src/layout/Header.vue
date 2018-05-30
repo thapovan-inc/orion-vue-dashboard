@@ -4,7 +4,7 @@
             <div class="logo">
                 <div class="orion-logo">Orion<span>Tracing tool</span></div>
             </div>
-            <button type="button" class="toggle-icon" id="sidebarCollapse">
+            <button type="button" class="toggle-icon" id="sidebarCollapse" @click="toggleNav()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -47,6 +47,7 @@
     export default {
         name: 'app-header',
         data: () => ({
+            active: true,
             user: '',
             keyword: '',
             isKeywordError: false,
@@ -67,6 +68,9 @@
 //        },
 
         methods: {
+            toggleNav() {
+                this.$parent.$emit('toggleNav');
+            },
             search() {
                 if (this.keyword.trim().length === 0) {
                     this.isKeywordError = true;

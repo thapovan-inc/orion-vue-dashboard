@@ -1,0 +1,125 @@
+#search-section {
+	display:block;
+	width:100%;
+	float:left;
+	margin-bottom:15px;
+	padding-top:5px;
+	.search-filters {
+		display:inline-block;
+		float:right;
+		position:relative;
+		top:-5px;
+		& > div {
+			display:inline-block;
+			vertical-align:middle;
+			margin-right:10px;
+			&:last-child {
+				margin-right:0;
+			}
+		}
+		.label {
+			font-size: 14px;
+			font-weight: 500;
+			text-transform:uppercase;
+			margin-right:20px;
+		}
+		input[type="text"] {
+			width:100px;
+			margin-right:7px;
+			&:last-child {
+				margin-right:0;
+			}
+		}
+		input[type="text"][name="location"] {
+			width:150px;
+		}
+	}
+}
+
+@media all and (max-width:1280px) {
+	#sidebar {
+		&.active {
+			& + #main-content {
+				#search-section {
+					.search-filters {
+						top: 0;
+						text-align: right;
+						.form-group {
+							display: block;
+							margin-top: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media all and (max-width:1024px) {
+	#search-section {
+		.search-filters {
+			top:0;
+			text-align:right;
+			input[type="text"] {
+				width:92px;
+			}
+			.form-group {
+				display:block;
+				margin-top:10px;
+			}
+		}
+	}
+}
+
+@media all and (max-width:990px) {
+	#sidebar {
+		&.active {
+			& + #main-content {
+				#search-section {
+					margin-bottom:20px;
+					.search-filters {
+						display:block;
+						border-top: solid 1px #d8d8d8;
+						margin-top:10px;
+						padding-top:10px;
+						text-align:left;
+						float:none;
+					}
+				}
+			}
+		}
+	}
+}
+
+@media all and (max-width:767px) {
+	#search-section {
+		margin-bottom:20px;
+		.search-filters {
+			display:block;
+			border-top: solid 1px #d8d8d8;
+			margin-top:10px;
+			padding-top:10px;
+			text-align:left;
+			float:none;
+		}
+	}
+}
+
+@media all and (max-width:500px) {
+	#search-section {
+		.search-filters {
+			.label {
+				display:block;
+				margin-right:0;
+				margin-bottom:10px;
+			}
+			input[type="text"] {
+				width:calc(50% - 32px);
+			}
+			input[type="text"][name="location"] {
+				width: calc(100% - 26px);
+				margin-bottom:7px;
+			}
+		}
+	}
+}
